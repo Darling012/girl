@@ -1,0 +1,11 @@
+server:
+  port: 8091
+girl:
+  cupSize: B
+  age: 18
+boy :
+   name : zhangsan
+   age: 19
+
+man : "${boy}"
+women : a
