@@ -1,4 +1,4 @@
-package com.imooc.upload;
+package com.imooc.excel;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 工具类 -从HttpServletRequest中获取文件数据
- * 
+ *
  */
 @RestController
 public class RequestUtil {
 
     /**
      * 从HttpServletRequest中获取所有的文件
-     * 
+     *
      * @param request
      * @return FileItem对象列表
      * @throws FileUploadException
@@ -45,7 +45,7 @@ public class RequestUtil {
 
     /**
      * 从request中获取FileItem对象列表
-     * 
+     *
      * @param request
      * @return fileItemFromRequestList
      * @throws FileUploadException
