@@ -1,4 +1,4 @@
-package com.mvc.advice;
+package com.mvc.timeCovert;
 
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;

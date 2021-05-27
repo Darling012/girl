@@ -1,4 +1,4 @@
-package com.mvc.controller;
+package com.mvc.timeCovert;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -30,10 +31,18 @@ public class TimeFormatController {
      * @return
      */
     @GetMapping("path/{time}")
-    public String testPathVariable(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime time) {
-        return time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    public LocalDateTime testPathVariable(@PathVariable @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime time) {
+        return time;
     }
-
+     /**
+     *
+     * @param time
+     * @return
+     */
+    @GetMapping("path1/{time}")
+    public LocalDateTime testPathVariable1(@PathVariable LocalDateTime time) {
+        return time;
+    }
     /**
      * 不需要加convert等 此方式可成功
      * @param time
@@ -43,7 +52,15 @@ public class TimeFormatController {
     public String testRequestParam(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime time) {
         return time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
-
+    /**
+     * 不需要加convert等 此方式可成功
+     * @param time
+     * @return
+     */
+    @GetMapping("request-param1")
+    public LocalDate testRequestParam1(@RequestParam LocalDate time) {
+        return time;
+    }
     /**
      * 需要增加Converter才可以
      * DateHandlerConfig LocalDateTimeAdvice 都可以
@@ -61,13 +78,7 @@ public class TimeFormatController {
     }
 
 
-    @Data
-    public static class TimeParam {
-        // 可解决
-        // @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-        // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-        private LocalDateTime time;
-    }
+
 
 
 }
