@@ -22,7 +22,7 @@ import java.time.format.DateTimeFormatter;
  * @create: 2021-05-21 16:19
  **/
 @RestController
-@RequestMapping("time")
+@RequestMapping("admin/time")
 public class TimeFormatController {
     /**
      * 不需要加convert等 此方式可成功
@@ -30,8 +30,8 @@ public class TimeFormatController {
      * @return
      */
     @GetMapping("path/{time}")
-    public String testPathVariable(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime time) {
-        return time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    public LocalDateTime testPathVariable(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime time) {
+        return time;
     }
 
     /**
@@ -40,8 +40,8 @@ public class TimeFormatController {
      * @return
      */
     @GetMapping("request-param")
-    public String testRequestParam(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime time) {
-        return time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    public LocalDateTime testRequestParam(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime time) {
+        return time;
     }
 
     /**
@@ -54,7 +54,6 @@ public class TimeFormatController {
     public TimeParam testRequestParamPojo(TimeParam time) {
         return time;
     }
-
     @PostMapping("post/request-body-pojo")
     public TimeParam testPostRequestBody(@RequestBody  TimeParam time) {
         return time;

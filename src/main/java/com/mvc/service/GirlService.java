@@ -4,6 +4,7 @@ import com.mvc.domain.Girl;
 import com.mvc.enums.ResultEnum;
 import com.mvc.exception.GirlException;
 import com.mvc.repository.GirlRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,10 +16,11 @@ import java.util.Optional;
  * 2016-11-04 00:08
  */
 @Service
+@RequiredArgsConstructor
 public class GirlService {
 
-    @Autowired
-    private GirlRepository girlRepository;
+    // @Autowired
+    private final GirlRepository girlRepository;
 
     @Transactional
     public void insertTwo() {
