@@ -8,9 +8,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.statemachine.StateMachine;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-
+@Component
 public class FsmApplication implements CommandLineRunner {
 
     private Logger logger = LoggerFactory.getLogger(getClass());

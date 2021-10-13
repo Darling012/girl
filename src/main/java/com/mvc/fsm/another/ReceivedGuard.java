@@ -2,6 +2,7 @@ package com.mvc.fsm.another;
 
 import org.springframework.statemachine.StateContext;
 import org.springframework.statemachine.guard.Guard;
+import org.springframework.stereotype.Component;
 
 /**
  * @program: girl
@@ -9,6 +10,7 @@ import org.springframework.statemachine.guard.Guard;
  * @author: ling
  * @createTime: 2021-09-01 09:14
  **/
+@Component
 public class ReceivedGuard implements Guard {
     @Override
     public boolean evaluate(StateContext stateContext) {

@@ -142,6 +142,17 @@
             <artifactId>feign-spring4</artifactId>
             <version>11.0</version>
         </dependency>
+        <!--  SpringBoot 有俩种使用 Caffeine 作为缓存的方式      -->
+        <!--     1. 直接引入 Caffeine 依赖，然后使用 Caffeine 方法实现缓存   -->
+        <!--     2. 引入 Caffeine 和 Spring Cache 依赖，使用 SpringCache 注解方法实现缓存。-->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
