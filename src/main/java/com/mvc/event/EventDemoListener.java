@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class EventDemoListener implements ApplicationListener<EventDemo> {
     @Override
-    @Async
+    @Async("asyncServiceExecutor")
     public void onApplicationEvent(EventDemo event) {
         System.out.println("receiver " + event.getMessage()+ Thread.currentThread().getName());
     }
