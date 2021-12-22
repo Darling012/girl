@@ -63,7 +63,7 @@ public class TimeFormatController {
     @Data
     public static class TimeParam {
         // 可解决
-        // @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime time;
     }

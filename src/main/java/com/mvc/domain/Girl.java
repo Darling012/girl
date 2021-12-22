@@ -1,9 +1,13 @@
 package com.mvc.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Min;
+import java.io.Serializable;
 
 /**
  * Created by 廖师兄

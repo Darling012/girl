@@ -34,7 +34,7 @@ import java.util.Date;
 /**
  * 日期处理全局配置
  */
-@Configuration
+// @Configuration
 public class DateHandlerConfig {
 
     /**
