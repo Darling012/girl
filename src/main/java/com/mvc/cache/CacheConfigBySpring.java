@@ -1,11 +1,21 @@
 package com.mvc.cache;
 
+import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.cache.RedisCacheWriter;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.serializer.*;
 
 import java.util.concurrent.TimeUnit;
 @EnableCaching
@@ -53,4 +63,28 @@ public class CacheConfigBySpring {
      * // 弱引用
      * Caffeine.newBuilder().weakKeys().weakValues().build();
      */
+
+
+
+    @Bean(name = "redisCacheManager")
+    @Primary
+    public CacheManager cacheManager(ObjectMapper objectMapper, RedisConnectionFactory redisConnectionFactory) {
+        //设置序列化
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
+
+        RedisCacheConfiguration cacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
+                                                                            .disableCachingNullValues()
+                                                                            //                .computePrefixWith(cacheName -> "yourAppName".concat(":").concat(cacheName).concat(":"))
+                                                                            .serializeKeysWith(
+                                                                                    RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
+                                                                            .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer));
+
+        return RedisCacheManager.builder(redisConnectionFactory)
+                                .cacheDefaults(cacheConfiguration)
+                                .build();
+
+    }
 }
