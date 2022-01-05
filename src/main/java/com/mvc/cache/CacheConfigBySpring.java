@@ -66,7 +66,7 @@ public class CacheConfigBySpring {
 
 
 
-    @Bean(name = "redisCacheManager")
+    // @Bean(name = "redisCacheManager")
     @Primary
     public CacheManager cacheManager(ObjectMapper objectMapper, RedisConnectionFactory redisConnectionFactory) {
         //设置序列化

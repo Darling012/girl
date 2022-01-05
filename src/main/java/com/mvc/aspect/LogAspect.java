@@ -30,18 +30,18 @@ public class LogAspect {
 
     @Around(value = "logPointCut()")
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
-        log.info("执行-----LogAspect----doAround-----");
+        log.info("9、执行-----LogAspect----doAround-----");
         return pjp.proceed();
     }
 
     @Before(value = "logPointCut()")
     public void doBefore() {
-        log.info("----LogAspect----doBefore-----------------记录日志");
+        log.info("10、----LogAspect----doBefore-----------------记录日志");
     }
 
     @After(value = "logPointCut()")
     public void doAfter() {
-        log.info("----LogAspect----doAfter-----------------记录日志");
+        log.info("11、----LogAspect----doAfter-----------------记录日志");
     }
 
     /**
@@ -51,7 +51,7 @@ public class LogAspect {
      */
     @AfterReturning(pointcut = "logPointCut()", returning = "jsonResult")
     public void doAfterReturning(JoinPoint joinPoint, Object jsonResult) {
-        log.info("----LogAspect----doAfterReturning-----------------记录日志");
+        log.info("12、----LogAspect----doAfterReturning-----------------记录日志");
     }
 
     /**

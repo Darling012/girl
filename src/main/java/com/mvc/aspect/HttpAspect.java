@@ -28,14 +28,14 @@ public class HttpAspect {
 
     @Around("log()")
     public void doAround(ProceedingJoinPoint pjp) throws Throwable {
-        logger.info("执行-----HttpAspect----doAround--before---");
+        logger.info("6、执行-----HttpAspect----doAround--before---");
          pjp.proceed();
-        logger.info("执行-----HttpAspect----doAround--after---");
+        logger.info("13、执行-----HttpAspect----doAround--after---");
     }
 
     @Before("log()")
     public void doBefore(JoinPoint joinPoint) {
-        logger.info("执行-----HttpAspect----doBefore-----");
+        logger.info("7、执行-----HttpAspect----doBefore-----");
 
         // ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         // HttpServletRequest request = attributes.getRequest();
@@ -59,13 +59,13 @@ public class HttpAspect {
 
     @After("log()")
     public void doAfter() {
-        logger.info("执行-----HttpAspect----doAfter-----");
+        logger.info("14、执行-----HttpAspect----doAfter-----");
     }
 
     @AfterReturning(returning = "object", pointcut = "log()")
     public void doAfterReturning(Object object) {
         // logger.info("response={}", object.toString());
-        logger.info("执行-----HttpAspect----doAfterReturning-----");
+        logger.info("15、执行-----HttpAspect----doAfterReturning-----");
     }
 
 }

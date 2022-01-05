@@ -108,7 +108,7 @@ public class GirlController {
     @Log
     @PostMapping("json")
     public String String2Entity(@RequestBody Girl girl){
-        System.out.println("-----------------");
+        System.out.println("-------controller----------");
         return girl.toString();
     }
     @Log

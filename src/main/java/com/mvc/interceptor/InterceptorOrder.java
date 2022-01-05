@@ -52,7 +52,7 @@ public class InterceptorOrder implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
-        log.info("执行-----InterceptorOrder----postHandle-----");
+        log.info("17、执行-----InterceptorOrder----postHandle-----");
     }
 
 
@@ -68,7 +68,7 @@ public class InterceptorOrder implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
-        log.info("执行-----InterceptorOrder----afterCompletion-----");
+        log.info("18、执行-----InterceptorOrder----afterCompletion-----");
     }
 
 }

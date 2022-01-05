@@ -25,7 +25,7 @@ public class ResponseBodyAdviceOrder implements ResponseBodyAdvice<Object> {
 
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
-         log.info("执行-----ResponseBodyAdviceOrder-----beforeBodyWrite----");
+         log.info("16、执行-----ResponseBodyAdviceOrder-----beforeBodyWrite----");
         return body;
     }
 }
