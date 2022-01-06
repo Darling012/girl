@@ -1,6 +1,7 @@
-package com.mvc.config;
+package com.mvc.interceptor;
 
 import com.mvc.interceptor.InterceptorOrder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -13,9 +14,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class MyInterceptorConfig implements WebMvcConfigurer {
-
+    @Autowired
+    private InterceptorOrder InterceptorOrder;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new InterceptorOrder()).addPathPatterns("/**");
+        registry.addInterceptor(InterceptorOrder).addPathPatterns("/**");
     }
 }

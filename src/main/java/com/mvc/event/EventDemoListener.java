@@ -24,7 +24,7 @@ public class EventDemoListener implements ApplicationListener<EventDemo> {
     @Async("asyncServiceExecutor")
     public void onApplicationEvent(EventDemo event) {
 
-        System.out.println("receiver " + event.getMessage() + Thread.currentThread()
+        log.info("receiver:[{}],线程为:[{}]",event.getMessage(),Thread.currentThread()
                                                                     .getName());
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         log.info("requestAttributes-------{}", requestAttributes.getAttribute("hello", 0));

@@ -2,6 +2,7 @@ package com.mvc.filter;
 
 import com.mvc.wrapper.RequestWrapper;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.Filter;
@@ -12,6 +13,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.UUID;
 
 /**
  * 过滤器依赖于servlet容器。在实现上，基于函数回调，它可以对几乎所有请求进行过滤，一个过滤器实例只能在容器初始化时调用一次。
@@ -37,6 +39,7 @@ public class FilterOrder implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         log.info("1、执行-----FilterOrder----start-----");
+        MDC.put("ctxLogId", UUID.randomUUID().toString());
         ServletRequest requestWrapper = null;
         if (request instanceof HttpServletRequest) {
             requestWrapper = new RequestWrapper((HttpServletRequest) request);
@@ -47,6 +50,7 @@ public class FilterOrder implements Filter {
             chain.doFilter(requestWrapper, response);
         }
         log.info("19、执行-----FilterOrder----end-----");
+         MDC.clear();
     }
 
     /* (non-Javadoc)
