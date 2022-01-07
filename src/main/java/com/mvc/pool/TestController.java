@@ -2,6 +2,7 @@ package com.mvc.pool;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestAttributes;
@@ -9,7 +10,9 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
+import java.util.concurrent.Future;
 
 @RestController
 @Slf4j
@@ -42,15 +45,23 @@ public class TestController {
             RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
             String name = (String) attributes.getAttribute("name", RequestAttributes.SCOPE_SESSION);
             log.info("线程池中线程------从session中获取数据:{}", name);
+            throw new RuntimeException("子线程抛出异常");
         });
-        asyncServiceExecutor.execute(() -> {
-            System.out.println(Thread.currentThread()
-                                     .getName());
-            // 1. 第一种单独复制，这样每个都要写
-            // RequestContextHolder.setRequestAttributes(requestAttributes);
-            RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
-            String name = (String) attributes.getAttribute("name", RequestAttributes.SCOPE_SESSION);
-            log.info("线程池中线程------从session中获取数据:{}", name);
-        });
+        log.info("子线程抛出异常,父线程不受影响");
+        // Future<Integer> task = asyncServiceExecutor.submit(() -> {
+        //     System.out.println(Thread.currentThread()
+        //                              .getName());
+        //     // 1. 第一种单独复制，这样每个都要写
+        //     // RequestContextHolder.setRequestAttributes(requestAttributes);
+        //      RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
+        //    String name = (String) attributes.getAttribute("name", RequestAttributes.SCOPE_SESSION);
+        //     log.info("线程池中线程------从session中获取数据:{}", name);
+        //     return 1/0;
+        // });
+        // try {
+        //     Integer number = task.get();
+        // } catch (Exception e) {
+        //   log.info("捕获到future.get异常{}",e.getMessage());
+        // }
     }
 }
